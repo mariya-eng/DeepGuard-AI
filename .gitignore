@@ -1,0 +1,27 @@
+venv/
+__pycache__/
+*.pyc
+
+# Firebase credentials
+serviceAccountKey.json
+firebase_key.json
+
+# Local/generated files
+uploads/
+dataset/
+processed/
+checkpoints/
+models/
+
+test.mp4
+*.wav
+*.mp3
+
+# Environment variables
+.env
+
+# Model files
+*.pt
+*.pth
+*.bin
+*.safetensors

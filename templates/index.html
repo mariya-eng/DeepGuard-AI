@@ -1,0 +1,3057 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>DeepGuard AI</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08111f,
+            #101b35,
+            #16233f
+        );
+
+    color: white;
+}
+
+.navbar {
+
+    height: 70px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        0 40px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.1);
+}
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+.logo span {
+
+    color: #67e8f9;
+}
+
+.user-area {
+
+    display: flex;
+
+    align-items:
+        center;
+
+    gap: 15px;
+}
+
+.user-email {
+
+    font-size: 14px;
+
+    opacity: 0.8;
+}
+
+.logout {
+
+    padding:
+        9px 16px;
+
+    border-radius:
+        8px;
+
+    background:
+        #ef4444;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+}
+
+.container {
+
+    width: 92%;
+
+    max-width:
+        1200px;
+
+    margin:
+        40px auto;
+}
+
+.hero {
+
+    text-align:
+        center;
+
+    margin-bottom:
+        35px;
+}
+
+.hero h1 {
+
+    font-size:
+        42px;
+
+    margin-bottom:
+        10px;
+}
+
+.hero p {
+
+    color:
+        #b7c3d4;
+}
+
+.login-card {
+
+    max-width:
+        450px;
+
+    margin:
+        70px auto;
+
+    padding:
+        35px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius:
+        18px;
+}
+
+.tabs {
+
+    display:
+        flex;
+
+    margin-bottom:
+        25px;
+}
+
+.tab {
+
+    width:
+        50%;
+
+    padding:
+        12px;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    font-size:
+        16px;
+}
+
+.tab.active {
+
+    border-bottom:
+        2px solid
+        #67e8f9;
+}
+
+.form-group {
+
+    margin-bottom:
+        16px;
+}
+
+.form-group label {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+}
+
+.form-group input {
+
+    width:
+        100%;
+
+    padding:
+        13px;
+
+    border-radius:
+        9px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    background:
+        rgba(0,0,0,0.2);
+
+    color:
+        white;
+}
+
+.primary-btn,
+.google-btn,
+.analyze-btn {
+
+    width:
+        100%;
+
+    padding:
+        13px;
+
+    border:
+        none;
+
+    border-radius:
+        9px;
+
+    cursor:
+        pointer;
+}
+
+.primary-btn,
+.analyze-btn {
+
+    background:
+        #67e8f9;
+
+    color:
+        #06101d;
+
+    font-weight:
+        bold;
+}
+
+.analyze-btn:disabled {
+
+    opacity:
+        0.7;
+
+    cursor:
+        not-allowed;
+}
+
+.google-btn {
+
+    margin-bottom:
+        20px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        white;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+}
+
+.dashboard {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        25px;
+}
+
+.card {
+
+    padding:
+        30px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius:
+        18px;
+}
+
+.card h2 {
+
+    margin-bottom:
+        20px;
+}
+
+.upload-box {
+
+    border:
+        2px dashed
+        rgba(255,255,255,0.2);
+
+    padding:
+        40px 20px;
+
+    text-align:
+        center;
+
+    border-radius:
+        14px;
+
+    margin-bottom:
+        20px;
+}
+
+.upload-box input {
+
+    margin:
+        20px 0;
+}
+
+.file-name {
+
+    color:
+        #67e8f9;
+
+    min-height:
+        20px;
+
+    word-break:
+        break-word;
+}
+
+.chat-card {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    height:
+        550px;
+}
+
+.chat-messages {
+
+    flex:
+        1;
+
+    overflow-y:
+        auto;
+
+    padding:
+        10px;
+
+    margin-bottom:
+        15px;
+}
+
+.message {
+
+    padding:
+        12px 15px;
+
+    margin-bottom:
+        12px;
+
+    border-radius:
+        12px;
+
+    max-width:
+        85%;
+
+    line-height:
+        1.5;
+}
+
+.bot {
+
+    background:
+        rgba(103,232,249,0.1);
+}
+
+.user {
+
+    background:
+        rgba(255,255,255,0.1);
+
+    margin-left:
+        auto;
+}
+
+.chat-input {
+
+    display:
+        flex;
+
+    gap:
+        8px;
+}
+
+.chat-input input {
+
+    flex:
+        1;
+
+    padding:
+        13px;
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(0,0,0,0.25);
+
+    color:
+        white;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+}
+
+.chat-input button {
+
+    padding:
+        0 18px;
+
+    border:
+        none;
+
+    border-radius:
+        9px;
+
+    background:
+        #67e8f9;
+
+    cursor:
+        pointer;
+}
+
+
+/* =====================================================
+   RESULT SECTION
+===================================================== */
+
+.result-card {
+
+    margin-top:
+        25px;
+}
+
+.result-card > h2 {
+
+    margin-bottom:
+        25px;
+}
+
+
+/* =====================================================
+   OVERALL PREDICTION
+===================================================== */
+
+.prediction {
+
+    text-align:
+        center;
+
+    padding:
+        30px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(0,0,0,0.2);
+
+    margin-bottom:
+        20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.prediction h3 {
+
+    font-size:
+        15px;
+
+    color:
+        #aebdce;
+
+    margin-bottom:
+        12px;
+}
+
+.prediction .value {
+
+    font-size:
+        36px;
+
+    font-weight:
+        bold;
+}
+
+
+/* =====================================================
+   OVERALL STATS
+===================================================== */
+
+.stats {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:
+        12px;
+}
+
+.stat {
+
+    text-align:
+        center;
+
+    padding:
+        18px 12px;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,0.05);
+}
+
+.stat strong {
+
+    display:
+        block;
+
+    font-size:
+        20px;
+
+    margin-bottom:
+        5px;
+}
+
+.stat span {
+
+    font-size:
+        12px;
+
+    color:
+        #9aa9ba;
+}
+
+
+/* =====================================================
+   MODALITY TITLE
+===================================================== */
+
+.modality-heading {
+
+    margin-top:
+        35px;
+
+    margin-bottom:
+        15px;
+
+    font-size:
+        22px;
+}
+
+
+/* =====================================================
+   MODALITY CARDS
+===================================================== */
+
+.modality-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        18px;
+
+    margin-top:
+        15px;
+}
+
+.modality-card {
+
+    padding:
+        22px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    min-width:
+        0;
+}
+
+.modality-card h3 {
+
+    margin-bottom:
+        18px;
+
+    font-size:
+        19px;
+}
+
+.modality-description {
+
+    color:
+        #9aa9ba;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+
+    margin-bottom:
+        18px;
+}
+
+.modality-status {
+
+    font-size:
+        20px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        18px;
+}
+
+
+/* =====================================================
+   SCORE ROW
+===================================================== */
+
+.score-row {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        10px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.score-row:last-child {
+
+    border-bottom:
+        none;
+}
+
+.score-row span {
+
+    color:
+        #b7c3d4;
+
+    font-size:
+        14px;
+}
+
+.score-row strong {
+
+    font-size:
+        15px;
+}
+
+
+/* =====================================================
+   CONFIDENCE BAR
+===================================================== */
+
+.confidence-container {
+
+    margin-top:
+        18px;
+}
+
+.confidence-label {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    font-size:
+        13px;
+
+    color:
+        #aebdce;
+
+    margin-bottom:
+        7px;
+}
+
+.confidence-bar {
+
+    width:
+        100%;
+
+    height:
+        8px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border-radius:
+        20px;
+
+    overflow:
+        hidden;
+}
+
+.confidence-fill {
+
+    height:
+        100%;
+
+    background:
+        #67e8f9;
+
+    border-radius:
+        20px;
+
+    transition:
+        width 0.5s ease;
+}
+
+
+/* =====================================================
+   TIMESTAMP BOX
+===================================================== */
+
+.timestamp-box {
+
+    margin-top:
+        18px;
+
+    padding:
+        14px;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(239,68,68,0.08);
+
+    border:
+        1px solid
+        rgba(239,68,68,0.2);
+}
+
+.timestamp-title {
+
+    color:
+        #f87171;
+
+    margin-bottom:
+        10px;
+
+    font-weight:
+        bold;
+
+    font-size:
+        14px;
+}
+
+.timestamp {
+
+    padding:
+        6px 0;
+
+    font-size:
+        13px;
+
+    color:
+        #d7e0ea;
+}
+
+
+/* =====================================================
+   NO SUSPICIOUS AREA
+===================================================== */
+
+.no-suspicious {
+
+    margin-top:
+        18px;
+
+    padding:
+        13px;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(34,197,94,0.08);
+
+    border:
+        1px solid
+        rgba(34,197,94,0.18);
+
+    color:
+        #86efac;
+
+    font-size:
+        13px;
+}
+
+
+/* =====================================================
+   TEXT TRANSCRIPT
+===================================================== */
+
+.transcript {
+
+    margin-top:
+        18px;
+
+    padding:
+        15px;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(0,0,0,0.2);
+
+    line-height:
+        1.6;
+
+    max-height:
+        180px;
+
+    overflow-y:
+        auto;
+
+    font-size:
+        13px;
+
+    color:
+        #d7e0ea;
+}
+
+.transcript-title {
+
+    color:
+        #67e8f9;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        10px;
+}
+
+
+/* =====================================================
+   MULTIMODAL FUSION
+===================================================== */
+
+.fusion-box {
+
+    margin-top:
+        25px;
+
+    padding:
+        25px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(103,232,249,0.06);
+
+    border:
+        1px solid
+        rgba(103,232,249,0.18);
+}
+
+.fusion-box h3 {
+
+    font-size:
+        20px;
+
+    margin-bottom:
+        5px;
+}
+
+.fusion-description {
+
+    color:
+        #9aa9ba;
+
+    font-size:
+        13px;
+
+    margin-bottom:
+        15px;
+}
+
+.fusion-row {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        13px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+.fusion-row:last-child {
+
+    border-bottom:
+        none;
+}
+
+.fusion-row span {
+
+    color:
+        #b7c3d4;
+}
+
+.fusion-row strong {
+
+    font-size:
+        15px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading {
+
+    display:
+        none;
+
+    text-align:
+        center;
+
+    margin-top:
+        15px;
+
+    color:
+        #67e8f9;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px) {
+
+    .modality-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+@media(max-width:900px) {
+
+    .dashboard {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .navbar {
+
+        padding:
+            0 20px;
+    }
+
+    .user-email {
+
+        display:
+            none;
+    }
+
+    .container {
+
+        width:
+            94%;
+
+        margin:
+            25px auto;
+    }
+
+    .hero h1 {
+
+        font-size:
+            32px;
+    }
+
+    .card {
+
+        padding:
+            20px;
+    }
+
+    .stats {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+{% if user_email %}
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        DeepGuard <span>AI</span>
+    </div>
+
+    <div class="user-area">
+
+        <span class="user-email">
+            {{ user_email }}
+        </span>
+
+        <a
+            href="/logout"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <div class="hero">
+
+        <h1>
+            Deepfake Detection
+        </h1>
+
+        <p>
+            Multimodal video authenticity analysis
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         UPLOAD + CHAT
+    ================================================== -->
+
+    <div class="dashboard">
+
+
+        <!-- VIDEO UPLOAD -->
+
+        <div class="card">
+
+            <h2>
+                🎥 Video Analysis
+            </h2>
+
+            <form
+                id="uploadForm"
+                action="/analyze"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                <div class="upload-box">
+
+                    <p>
+                        Select your video
+                    </p>
+
+                    <input
+                        type="file"
+                        name="video"
+                        id="videoInput"
+                        accept=".mp4,.avi,.mov,.mkv"
+                        required
+                    >
+
+                    <div
+                        id="fileName"
+                        class="file-name"
+                    ></div>
+
+                    <p>
+                        MP4, AVI, MOV or MKV
+                    </p>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                    class="analyze-btn"
+                >
+                    🔍 Analyze Video
+                </button>
+
+                <div
+                    id="loadingMessage"
+                    class="loading"
+                >
+                    ⏳ Analyzing video...
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- CHATBOT -->
+
+        <div class="card chat-card">
+
+            <h2>
+                🤖 DeepGuard Chatbot
+            </h2>
+
+            <div
+                class="chat-messages"
+                id="chatMessages"
+            >
+
+                <div class="message bot">
+
+                    Hi! 👋 I'm DeepGuard AI.
+
+                    <br><br>
+
+                    Analyze a video first,
+                    then ask questions about
+                    visual, audio or text analysis.
+
+                </div>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="Ask about this video..."
+                    onkeydown="handleEnter(event)"
+                >
+
+                <button
+                    onclick="sendMessage()"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% if result %}
+
+
+<!-- =====================================================
+     ANALYSIS RESULT
+===================================================== -->
+
+<div class="card result-card">
+
+
+    <h2>
+        🔎 Analysis Result
+    </h2>
+
+
+    <!-- =================================================
+         OVERALL RESULT
+    ================================================== -->
+
+    <div class="prediction">
+
+        <h3>
+            FINAL PREDICTION
+        </h3>
+
+        <div class="value">
+
+            {% if result.prediction == "DEEPFAKE" %}
+
+                🔴 DEEPFAKE
+
+            {% else %}
+
+                🟢 ORIGINAL
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         OVERALL SCORES
+    ================================================== -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <strong>
+                {{ "%.2f"|format(
+                    result.confidence * 100
+                ) }}%
+            </strong>
+
+            <span>
+                Overall Confidence
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                {{ "%.2f"|format(
+                    result.real_score * 100
+                ) }}%
+            </strong>
+
+            <span>
+                Overall Real Score
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                {{ "%.2f"|format(
+                    result.fake_score * 100
+                ) }}%
+            </strong>
+
+            <span>
+                Overall Fake Score
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                {{ result.frames_analyzed }}
+            </strong>
+
+            <span>
+                Video Frames
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         MODALITY HEADING
+    ================================================== -->
+
+    <div class="modality-heading">
+
+        🧩 Detection by Modality
+
+    </div>
+
+
+    <div class="modality-grid">
+
+
+        <!-- =================================================
+             VISUAL / IMAGE
+        ================================================== -->
+
+        <div class="modality-card">
+
+            <h3>
+                🎥 Visual / Image
+            </h3>
+
+            <div class="modality-description">
+
+                Analyzes video frames for visual
+                manipulation and deepfake patterns.
+
+            </div>
+
+
+            <div class="modality-status">
+
+                {% if result.visual.prediction == "DEEPFAKE" %}
+
+                    🔴 FAKE
+
+                {% elif result.visual.prediction == "ORIGINAL" %}
+
+                    🟢 ORIGINAL
+
+                {% elif result.visual.prediction == "REAL" %}
+
+                    🟢 REAL
+
+                {% else %}
+
+                    ⚪ {{ result.visual.prediction }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Real Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.visual.real_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Fake Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.visual.fake_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Confidence
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.visual.confidence * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Frames Analyzed
+                </span>
+
+                <strong>
+                    {{ result.visual.frames_analyzed }}
+                </strong>
+
+            </div>
+
+
+            <div class="confidence-container">
+
+                <div class="confidence-label">
+
+                    <span>
+                        Fake Probability
+                    </span>
+
+                    <span>
+                        {{ "%.2f"|format(
+                            result.visual.fake_score * 100
+                        ) }}%
+                    </span>
+
+                </div>
+
+                <div class="confidence-bar">
+
+                    <div
+                        class="confidence-fill"
+                        style="width: {{ result.visual.fake_score * 100 }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            {% if result.visual.suspicious_segments %}
+
+            <div class="timestamp-box">
+
+                <div class="timestamp-title">
+                    🔴 Suspicious Visual Areas
+                </div>
+
+                {% for segment in result.visual.suspicious_segments %}
+
+                <div class="timestamp">
+
+                    <strong>
+                        {{ loop.index }}.
+                    </strong>
+
+                    {{ "%02d:%02d"|format(
+                        (segment.start // 60)|int,
+                        (segment.start % 60)|int
+                    ) }}
+
+                    –
+
+                    {{ "%02d:%02d"|format(
+                        (segment.end // 60)|int,
+                        (segment.end % 60)|int
+                    ) }}
+
+                    <br>
+
+                    <span style="color:#f87171; font-size:12px;">
+
+                        Fake Score:
+                        {{ "%.2f"|format(
+                            segment.fake_score * 100
+                        ) }}%
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="no-suspicious">
+
+                ✓ No suspicious visual area detected.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+             AUDIO / VOICE
+        ================================================== -->
+
+        <div class="modality-card">
+
+            <h3>
+                🔊 Audio / Voice
+            </h3>
+
+            <div class="modality-description">
+
+                Analyzes the audio track for
+                AI-generated or synthetic voice patterns.
+
+            </div>
+
+
+            <div class="modality-status">
+
+                {% if result.audio.prediction == "FAKE" %}
+
+                    🔴 FAKE
+
+                {% elif result.audio.prediction == "AI-GENERATED" %}
+
+                    🔴 AI-GENERATED
+
+                {% elif result.audio.prediction == "REAL" %}
+
+                    🟢 REAL
+
+                {% elif result.audio.prediction == "NO AUDIO" %}
+
+                    ⚪ NO AUDIO
+
+                {% else %}
+
+                    ⚪ {{ result.audio.prediction }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Real Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.audio.real_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Fake Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.audio.fake_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Confidence
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.audio.confidence * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Audio Chunks
+                </span>
+
+                <strong>
+                    {{ result.audio.chunks_analyzed }}
+                </strong>
+
+            </div>
+
+
+            <div class="confidence-container">
+
+                <div class="confidence-label">
+
+                    <span>
+                        Fake Probability
+                    </span>
+
+                    <span>
+                        {{ "%.2f"|format(
+                            result.audio.fake_score * 100
+                        ) }}%
+                    </span>
+
+                </div>
+
+                <div class="confidence-bar">
+
+                    <div
+                        class="confidence-fill"
+                        style="width: {{ result.audio.fake_score * 100 }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            {% if result.audio.suspicious_segments %}
+
+            <div class="timestamp-box">
+
+                <div class="timestamp-title">
+                    🔴 Suspicious Audio Areas
+                </div>
+
+                {% for segment in result.audio.suspicious_segments %}
+
+                <div class="timestamp">
+
+                    <strong>
+                        {{ loop.index }}.
+                    </strong>
+
+                    {{ "%02d:%02d"|format(
+                        (segment.start // 60)|int,
+                        (segment.start % 60)|int
+                    ) }}
+
+                    –
+
+                    {{ "%02d:%02d"|format(
+                        (segment.end // 60)|int,
+                        (segment.end % 60)|int
+                    ) }}
+
+                    <br>
+
+                    <span style="color:#f87171; font-size:12px;">
+
+                        Fake Score:
+                        {{ "%.2f"|format(
+                            segment.fake_score * 100
+                        ) }}%
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="no-suspicious">
+
+                ✓ No suspicious audio area detected.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+             TEXT / SPEECH
+        ================================================== -->
+
+        <div class="modality-card">
+
+            <h3>
+                📝 Text / Speech
+            </h3>
+
+            <div class="modality-description">
+
+                Converts speech to text and analyzes
+                the transcript for AI-generated content.
+
+            </div>
+
+
+            <div class="modality-status">
+
+                {% if result.text.prediction == "AI-GENERATED" %}
+
+                    🔴 AI-GENERATED
+
+                {% elif result.text.prediction == "HUMAN" %}
+
+                    🟢 HUMAN
+
+                {% elif result.text.prediction == "REAL" %}
+
+                    🟢 HUMAN
+
+                {% elif result.text.prediction == "NO SPEECH" %}
+
+                    ⚪ NO SPEECH
+
+                {% else %}
+
+                    ⚪ {{ result.text.prediction }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Human Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.text.real_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    AI-Generated Score
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.text.fake_score * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Confidence
+                </span>
+
+                <strong>
+                    {{ "%.2f"|format(
+                        result.text.confidence * 100
+                    ) }}%
+                </strong>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <span>
+                    Language
+                </span>
+
+                <strong>
+                    {{ result.text.language }}
+                </strong>
+
+            </div>
+
+
+            <div class="confidence-container">
+
+                <div class="confidence-label">
+
+                    <span>
+                        AI Probability
+                    </span>
+
+                    <span>
+                        {{ "%.2f"|format(
+                            result.text.fake_score * 100
+                        ) }}%
+                    </span>
+
+                </div>
+
+                <div class="confidence-bar">
+
+                    <div
+                        class="confidence-fill"
+                        style="width: {{ result.text.fake_score * 100 }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            {% if result.text.transcript %}
+
+            <div class="transcript">
+
+                <div class="transcript-title">
+
+                    🗣️ Transcript
+
+                </div>
+
+                {{ result.text.transcript }}
+
+            </div>
+
+            {% endif %}
+
+
+            {% if result.text.suspicious_segments %}
+
+            <div class="timestamp-box">
+
+                <div class="timestamp-title">
+                    🔴 Suspicious Speech Areas
+                </div>
+
+                {% for segment in result.text.suspicious_segments %}
+
+                <div class="timestamp">
+
+                    <strong>
+                        {{ loop.index }}.
+                    </strong>
+
+                    {{ "%02d:%02d"|format(
+                        (segment.start // 60)|int,
+                        (segment.start % 60)|int
+                    ) }}
+
+                    –
+
+                    {{ "%02d:%02d"|format(
+                        (segment.end // 60)|int,
+                        (segment.end % 60)|int
+                    ) }}
+
+                    <br>
+
+                    <span style="color:#f87171; font-size:12px;">
+
+                        AI Score:
+                        {{ "%.2f"|format(
+                            segment.fake_score * 100
+                        ) }}%
+
+                    </span>
+
+                    <br>
+
+                    <span style="color:#b7c3d4; font-size:12px;">
+
+                        "{{ segment.text }}"
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         MULTIMODAL ANALYSIS SUMMARY
+    ================================================== -->
+
+    <div class="fusion-box">
+
+        <h3>
+            🧠 Multimodal Analysis Summary
+        </h3>
+
+        <div class="fusion-description">
+
+            The video is analyzed independently through
+            visual, audio and speech-text models.
+
+        </div>
+
+
+        <div class="fusion-row">
+
+            <span>
+                🎥 Visual / Image
+            </span>
+
+            <strong>
+
+                {% if result.visual.prediction == "DEEPFAKE" %}
+
+                    🔴 FAKE
+
+                {% elif result.visual.prediction == "ORIGINAL" %}
+
+                    🟢 ORIGINAL
+
+                {% elif result.visual.prediction == "REAL" %}
+
+                    🟢 REAL
+
+                {% else %}
+
+                    ⚪ {{ result.visual.prediction }}
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <div class="fusion-row">
+
+            <span>
+                🔊 Audio / Voice
+            </span>
+
+            <strong>
+
+                {% if result.audio.prediction == "FAKE" %}
+
+                    🔴 FAKE
+
+                {% elif result.audio.prediction == "AI-GENERATED" %}
+
+                    🔴 AI-GENERATED
+
+                {% elif result.audio.prediction == "REAL" %}
+
+                    🟢 REAL
+
+                {% else %}
+
+                    ⚪ {{ result.audio.prediction }}
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <div class="fusion-row">
+
+            <span>
+                📝 Speech / Text
+            </span>
+
+            <strong>
+
+                {% if result.text.prediction == "AI-GENERATED" %}
+
+                    🔴 AI-GENERATED
+
+                {% elif result.text.prediction == "HUMAN" %}
+
+                    🟢 HUMAN
+
+                {% elif result.text.prediction == "REAL" %}
+
+                    🟢 HUMAN
+
+                {% else %}
+
+                    ⚪ {{ result.text.prediction }}
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <div class="fusion-row">
+
+            <span>
+                🎯 Existing Overall Result
+            </span>
+
+            <strong>
+
+                {% if result.prediction == "DEEPFAKE" %}
+
+                    🔴 DEEPFAKE
+
+                {% else %}
+
+                    🟢 ORIGINAL
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+
+{% else %}
+
+
+<!-- =====================================================
+     LOGIN
+====================================================== -->
+
+<div class="login-card">
+
+    <div
+        class="logo"
+        style="
+            text-align:center;
+            margin-bottom:25px;
+        "
+    >
+
+        DeepGuard <span>AI</span>
+
+    </div>
+
+
+    <div class="tabs">
+
+        <button
+            class="tab active"
+            id="signInTab"
+            onclick="showSignIn()"
+        >
+            Sign In
+        </button>
+
+        <button
+            class="tab"
+            id="signUpTab"
+            onclick="showSignUp()"
+        >
+            Sign Up
+        </button>
+
+    </div>
+
+
+    <button
+        class="google-btn"
+        onclick="googleLogin()"
+    >
+        🔵 Continue with Google
+    </button>
+
+
+    <div
+        style="
+            text-align:center;
+            margin:15px 0;
+            color:#8fa0b5;
+        "
+    >
+        OR
+    </div>
+
+
+    <!-- SIGN IN -->
+
+    <div id="signInForm">
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="signInUser()"
+        >
+            Sign In
+        </button>
+
+
+        <p
+            style="
+                text-align:center;
+                margin-top:18px;
+                color:#9aa9ba;
+            "
+        >
+
+            New user?
+
+            <a
+                href="#"
+                onclick="
+                    showSignUp();
+                    return false;
+                "
+                style="color:#67e8f9;"
+            >
+                Create an account
+            </a>
+
+        </p>
+
+    </div>
+
+
+    <!-- SIGN UP -->
+
+    <div
+        id="signUpForm"
+        style="display:none;"
+    >
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create a password"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm password"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="signUpUser()"
+        >
+            Create Account
+        </button>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+<!-- =====================================================
+     FIREBASE
+====================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDKRU5Zj1tThlH98_jdT7NQ9E_NINAFCDs",
+
+    authDomain:
+        "fakevdetect.firebaseapp.com",
+
+    projectId:
+        "fakevdetect",
+
+    storageBucket:
+        "fakevdetect.firebasestorage.app",
+
+    messagingSenderId:
+        "180603029225",
+
+    appId:
+        "1:180603029225:web:1c1da5ade50e515cec9278",
+
+    measurementId:
+        "G-NKQDHBVS9K"
+
+};
+
+
+const firebaseApp =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(
+        firebaseApp
+    );
+
+
+window.sendTokenToServer =
+async function(user) {
+
+    try {
+
+        const idToken =
+            await user.getIdToken();
+
+
+        const response =
+            await fetch(
+                "/firebase-login",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            idToken:
+                                idToken
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            window.location.href =
+                "/";
+
+        } else {
+
+            alert(
+                data.message ||
+                "Authentication failed."
+            );
+
+        }
+
+    } catch(error) {
+
+        alert(
+            "Authentication failed. "
+            + error.message
+        );
+
+    }
+
+};
+
+
+window.signUpUser =
+async function() {
+
+    const email =
+        document
+        .getElementById(
+            "signupEmail"
+        )
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById(
+            "signupPassword"
+        )
+        .value;
+
+
+    const confirmPassword =
+        document
+        .getElementById(
+            "confirmPassword"
+        )
+        .value;
+
+
+    if (!email || !password) {
+
+        alert(
+            "Please enter email and password."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        password !==
+        confirmPassword
+    ) {
+
+        alert(
+            "Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await
+            createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        await
+        sendTokenToServer(
+            result.user
+        );
+
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+};
+
+
+window.signInUser =
+async function() {
+
+    const email =
+        document
+        .getElementById(
+            "loginEmail"
+        )
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById(
+            "loginPassword"
+        )
+        .value;
+
+
+    if (!email || !password) {
+
+        alert(
+            "Please enter email and password."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await
+            signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        await
+        sendTokenToServer(
+            result.user
+        );
+
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+};
+
+
+window.googleLogin =
+async function() {
+
+    try {
+
+        const provider =
+            new GoogleAuthProvider();
+
+
+        const result =
+            await
+            signInWithPopup(
+                auth,
+                provider
+            );
+
+
+        await
+        sendTokenToServer(
+            result.user
+        );
+
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+};
+
+
+window.showSignIn =
+function() {
+
+    document
+    .getElementById(
+        "signInForm"
+    )
+    .style.display =
+        "block";
+
+
+    document
+    .getElementById(
+        "signUpForm"
+    )
+    .style.display =
+        "none";
+
+
+    document
+    .getElementById(
+        "signInTab"
+    )
+    .classList
+    .add(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "signUpTab"
+    )
+    .classList
+    .remove(
+        "active"
+    );
+
+};
+
+
+window.showSignUp =
+function() {
+
+    document
+    .getElementById(
+        "signInForm"
+    )
+    .style.display =
+        "none";
+
+
+    document
+    .getElementById(
+        "signUpForm"
+    )
+    .style.display =
+        "block";
+
+
+    document
+    .getElementById(
+        "signInTab"
+    )
+    .classList
+    .remove(
+        "active"
+    );
+
+
+    document
+    .getElementById(
+        "signUpTab"
+    )
+    .classList
+    .add(
+        "active"
+    );
+
+};
+
+</script>
+
+
+<!-- =====================================================
+     VIDEO + CHAT JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   VIDEO UPLOAD
+===================================================== */
+
+const videoInput =
+    document.getElementById(
+        "videoInput"
+    );
+
+
+const fileName =
+    document.getElementById(
+        "fileName"
+    );
+
+
+const uploadForm =
+    document.getElementById(
+        "uploadForm"
+    );
+
+
+const analyzeButton =
+    document.getElementById(
+        "analyzeButton"
+    );
+
+
+const loadingMessage =
+    document.getElementById(
+        "loadingMessage"
+    );
+
+
+if (videoInput) {
+
+    videoInput.addEventListener(
+        "change",
+        function() {
+
+            if (
+                videoInput.files
+                &&
+                videoInput.files.length
+            ) {
+
+                fileName.innerText =
+                    "Selected: "
+                    +
+                    videoInput.files[0].name;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ANALYZE VIDEO
+===================================================== */
+
+if (uploadForm) {
+
+    uploadForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            if (
+                !videoInput.files
+                ||
+                !videoInput.files.length
+            ) {
+
+                alert(
+                    "Please select a video first."
+                );
+
+                return;
+
+            }
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "video",
+                videoInput.files[0]
+            );
+
+
+            analyzeButton.disabled =
+                true;
+
+
+            analyzeButton.innerText =
+                "⏳ Analyzing...";
+
+
+            loadingMessage.style.display =
+                "block";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/analyze",
+                        {
+                            method:
+                                "POST",
+
+                            body:
+                                formData
+                        }
+                    );
+
+
+                const html =
+                    await response.text();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server error: "
+                        + response.status
+                    );
+
+                }
+
+
+                /*
+                 * Replace the current page with the
+                 * server-rendered result page.
+                 */
+
+                document.open();
+
+                document.write(
+                    html
+                );
+
+                document.close();
+
+
+            } catch(error) {
+
+                console.error(
+                    "Analysis error:",
+                    error
+                );
+
+
+                alert(
+                    "Video analysis failed: "
+                    + error.message
+                );
+
+
+                analyzeButton.disabled =
+                    false;
+
+
+                analyzeButton.innerText =
+                    "🔍 Analyze Video";
+
+
+                loadingMessage.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CHATBOT
+===================================================== */
+
+async function sendMessage() {
+
+    const input =
+        document.getElementById(
+            "chatInput"
+        );
+
+
+    const messages =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    if (!input || !messages) {
+
+        return;
+
+    }
+
+
+    const question =
+        input.value.trim();
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    const userMessage =
+        document.createElement(
+            "div"
+        );
+
+
+    userMessage.className =
+        "message user";
+
+
+    userMessage.innerText =
+        question;
+
+
+    messages.appendChild(
+        userMessage
+    );
+
+
+    input.value =
+        "";
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    const botMessage =
+        document.createElement(
+            "div"
+        );
+
+
+    botMessage.className =
+        "message bot";
+
+
+    botMessage.innerText =
+        "Thinking...";
+
+
+    messages.appendChild(
+        botMessage
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/chat",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            question:
+                                question
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        botMessage.innerText =
+            data.answer ||
+            "I could not understand that.";
+
+
+    } catch(error) {
+
+        console.error(
+            "Chat error:",
+            error
+        );
+
+
+        botMessage.innerText =
+            "Something went wrong.";
+
+    }
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =====================================================
+   ENTER KEY FOR CHAT
+===================================================== */
+
+function handleEnter(event) {
+
+    if (
+        event.key === "Enter"
+    ) {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
