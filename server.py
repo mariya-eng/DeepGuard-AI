@@ -9,6 +9,7 @@ from flask import (
 
 import os
 import uuid
+import json
 
 import firebase_admin
 from firebase_admin import (
@@ -37,22 +38,67 @@ app.secret_key = os.environ.get(
 
 SERVICE_ACCOUNT_FILE = "serviceAccountKey.json"
 
+FIREBASE_SERVICE_ACCOUNT_JSON = os.environ.get(
+    "FIREBASE_SERVICE_ACCOUNT_JSON"
+)
+
 if not firebase_admin._apps:
 
-    if not os.path.exists(
-        SERVICE_ACCOUNT_FILE
-    ):
-        raise FileNotFoundError(
-            "serviceAccountKey.json not found."
+    if FIREBASE_SERVICE_ACCOUNT_JSON:
+
+        try:
+
+            firebase_config = json.loads(
+                FIREBASE_SERVICE_ACCOUNT_JSON
+            )
+
+            cred = credentials.Certificate(
+                firebase_config
+            )
+
+            firebase_admin.initialize_app(
+                cred
+            )
+
+            print(
+                "\nFirebase initialized using "
+                "FIREBASE_SERVICE_ACCOUNT_JSON."
+            )
+
+        except Exception as e:
+
+            print(
+                "\nFirebase environment credential error:"
+            )
+
+            print(e)
+
+            raise
+
+    else:
+
+        if not os.path.exists(
+            SERVICE_ACCOUNT_FILE
+        ):
+
+            raise FileNotFoundError(
+                "Firebase credentials not found. "
+                "Set FIREBASE_SERVICE_ACCOUNT_JSON "
+                "or provide serviceAccountKey.json."
+            )
+
+        cred = credentials.Certificate(
+            SERVICE_ACCOUNT_FILE
         )
 
-    cred = credentials.Certificate(
-        SERVICE_ACCOUNT_FILE
-    )
+        firebase_admin.initialize_app(
+            cred
+        )
 
-    firebase_admin.initialize_app(
-        cred
-    )
+        print(
+            "\nFirebase initialized using "
+            "serviceAccountKey.json."
+        )
 
 
 # =========================================================
@@ -106,12 +152,14 @@ def allowed_file(filename):
 def format_duration(seconds):
 
     try:
+
         seconds = float(seconds)
 
     except (
         TypeError,
         ValueError
     ):
+
         return "Unknown"
 
     total_seconds = int(
@@ -636,14 +684,12 @@ def analyze_video():
 
         return render_template(
             "index.html",
-
             user_email=session[
                 "user"
             ].get(
                 "email",
                 ""
             ),
-
             result=result
         )
 
@@ -979,6 +1025,13 @@ def file_too_large(error):
 
 if __name__ == "__main__":
 
+    port = int(
+        os.environ.get(
+            "PORT",
+            7860
+        )
+    )
+
     print(
         "\n===================================="
     )
@@ -992,7 +1045,7 @@ if __name__ == "__main__":
     )
 
     print(
-        "http://127.0.0.1:5000"
+        f"http://127.0.0.1:{port}"
     )
 
     print(
@@ -1000,7 +1053,7 @@ if __name__ == "__main__":
     )
 
     app.run(
-        debug=True,
-        host="127.0.0.1",
-        port=5000
+        debug=False,
+        host="0.0.0.0",
+        port=port
     )
