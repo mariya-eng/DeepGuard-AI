@@ -17,7 +17,6 @@ from firebase_admin import (
     auth
 )
 
-from app.video_detector import detect_video
 
 
 # =========================================================
@@ -99,6 +98,17 @@ if not firebase_admin._apps:
             "\nFirebase initialized using "
             "serviceAccountKey.json."
         )
+
+
+# =========================================================
+# HEALTH CHECK
+# =========================================================
+
+@app.route("/health")
+def health():
+    return jsonify({
+        "status": "ok"
+    })
 
 
 # =========================================================
@@ -431,6 +441,11 @@ def analyze_video():
         # =================================================
         # MULTIMODAL ANALYSIS
         # =================================================
+
+        # Load the heavy AI detector only when an analysis
+        # request is made. This allows Render to detect the
+        # web server port during startup.
+        from app.video_detector import detect_video
 
         analysis = detect_video(
             video_path,
